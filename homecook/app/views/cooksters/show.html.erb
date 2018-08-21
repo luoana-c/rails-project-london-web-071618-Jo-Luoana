@@ -1,0 +1,20 @@
+<h1> <%= @cookster.name %></h1>
+
+<h3>Address:</h3>
+<p><%= @cookster.address %> </p>
+
+<h3>Cuisine types:</h3>
+
+<ul>
+  <% @cookster.cuisine_types.each do |c_t| %>
+    <li> <%= c_t.capitalize %> </li>
+  <% end %>
+</ul>
+
+<h3>Recipes:</h3>
+
+<ul>
+  <% @cookster.recipes.each do |recipe| %>
+    <li> <%= link_to recipe.name.capitalize, recipe_path(recipe) %> </li>
+  <% end %>
+</ul>

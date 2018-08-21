@@ -1,0 +1,5 @@
+<h1>Here are all the ingredients:</h1>
+
+<%= render(@ingredients) || "There are no ingredients!"%>
+
+<%= link_to "Create a new ingredient", new_ingredient_path(@ingredient) %>

@@ -1,6 +1,12 @@
 class RecipesController < ApplicationController
   def index
+    if params[:name]
+      @recipes = Recipe.where("name like ?", "%#{params[:name]}%")
+    elsif params[:cuisine_type]
+      @recipes = Recipe.where("cuisine_type like ?", "%#{params[:cuisine_type]}%")
+    else
     @recipes = Recipe.all
+    end
   end
 
   def show
@@ -12,7 +18,7 @@ class RecipesController < ApplicationController
   end
 
   def create
-    @recipe = Recipe.new(recipe_params)
+    @recipe = Recipe.new(recipe_params(:name, :cuisine_type, :cookster, ingredient_ids:[]))
     if @recipe.save
       redirect_to recipe_path(@recipe)
     else
@@ -26,7 +32,7 @@ class RecipesController < ApplicationController
 
   def update
     set_recipe
-    if @recipe.update(recipe_params)
+    if @recipe.update(recipe_params(:name, :cuisine_type, ingredient_ids:[]))
       redirect_to recipe_path(@recipe)
     else
       render :edit
@@ -43,6 +49,7 @@ class RecipesController < ApplicationController
     @recipe = Recipe.find(params[:id])
   end
 
-  def recipe_params
+  def recipe_params(*args)
+    params.require(:recipe).permit(*args)
   end
 end

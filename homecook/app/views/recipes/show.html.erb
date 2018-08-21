@@ -1,0 +1,16 @@
+<h1> <%= @recipe.name %> </h1>
+
+<h3>Cuisine type: <%= @recipe.cuisine_type %></h3>
+<h3>Cookster: <%= link_to @recipe.cookster.name, cookster_path(@recipe.cookster) %> </h3>
+
+<h3>This recipe has the following ingredients:</h3>
+
+<ul>
+  <% @recipe.ingredients.each do |i| %>
+    <li> <%= pluralize(i.ingredient_count(@recipe), i.unit_type) %> - <%= i.name %></li>
+  <% end %>
+</ul>
+
+<%= button_to "Edit this recipe", edit_recipe_path(@recipe), method: :get %><br>
+
+<%= button_to "Create a new recipe", new_recipe_path(@recipe), method: :get %>

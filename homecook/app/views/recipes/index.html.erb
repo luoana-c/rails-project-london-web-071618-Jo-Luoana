@@ -1,3 +1,17 @@
 <h1>Here are all the recipes:</h1>
 
+<%= form_tag(recipes_path, method: "get") do %>
+  <%= label_tag(:name, "Search by recipe:") %>
+  <%= text_field_tag(:name) %>
+  <%= submit_tag("Search") %>
+<% end %>
+
+<%= form_tag(recipes_path, method: "get") do %>
+  <%= label_tag(:cuisine_type, "Search by cuisine_type:") %>
+  <%= text_field_tag(:cuisine_type) %>
+  <%= submit_tag("Search") %>
+<% end %>
+
 <%= render(@recipes) || "There are no recipes!"%>
+
+<%= link_to "Create a new recipe", new_recipe_path(@recipe) %>

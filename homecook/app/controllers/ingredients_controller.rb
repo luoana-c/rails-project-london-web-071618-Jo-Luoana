@@ -44,5 +44,6 @@ class IngredientsController < ApplicationController
   end
 
   def ingredient_params
+    params.require(:ingredient).permit(:name, :unit_type)
   end
 end

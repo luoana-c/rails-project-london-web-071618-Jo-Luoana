@@ -1,0 +1,13 @@
+<h1> <%= @ingredient.name %> </h1>
+
+<h3>Unit type: <%= @ingredient.unit_type %></h3>
+
+<h3>This ingredient is found in the following recipes:</h3>
+
+<ul>
+  <% @ingredient.recipes.each do |recipe| %>
+    <li> <%= link_to recipe.name, recipe_path(recipe) %> made by <%= link_to recipe.cookster.name, cookster_path(recipe.cookster) %></li>
+  <% end %>
+</ul>
+
+<%= button_to "Create a new ingredient", new_ingredient_path(@ingredient), method: :get %>
