@@ -1,11 +1,15 @@
 class UsersController < ApplicationController
   def index
-    @users = User.all
+    @users = User.all.select{|user| user.cookster == true}
   end
 
   def show
     set_user
     authorized_for(params[:id])
+  end
+
+  def see_cookster
+    @cookster = User.find(params[:id])
   end
 
   def new

@@ -7,7 +7,7 @@
 
 <ul>
   <% @recipe.ingredients.each do |i| %>
-    <li> <%= pluralize(i.ingredient_count(@recipe), i.unit_type) %> - <%= i.name %></li>
+    <li> <%= i.name %></li>
   <% end %>
 </ul>
 

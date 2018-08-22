@@ -18,7 +18,8 @@ class RecipesController < ApplicationController
   end
 
   def create
-    @recipe = Recipe.new(recipe_params(:name, :cuisine_type, :cookster, ingredient_ids:[]))
+    @recipe = Recipe.new(recipe_params(:name, :cuisine_type, :price, ingredient_ids:[]))
+    @recipe.user = current_user
     if @recipe.save
       redirect_to recipe_path(@recipe)
     else
@@ -33,8 +34,9 @@ class RecipesController < ApplicationController
   end
 
   def update
+  
     set_recipe
-    if @recipe.update(recipe_params(:name, :cuisine_type, ingredient_ids:[]))
+    if @recipe.update(recipe_params(:name, :cuisine_type, :price, ingredient_ids:[]))
       redirect_to recipe_path(@recipe)
     else
       render :edit

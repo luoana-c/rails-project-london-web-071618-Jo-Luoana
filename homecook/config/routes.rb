@@ -6,8 +6,9 @@ Rails.application.routes.draw do
   resources :order_recipes
   resources :orders
 
+  get "/cooksters/:id", to: 'users#see_cookster', as: 'see_cookster'
   get "/signup", to: 'users#new', as: 'signup'
-  
+
   get "/login",     to: 'sessions#new',     as: 'login'
   post "/sessions", to: "sessions#create",  as: 'sessions'
   post "/logout",   to: "sessions#destroy", as: 'logout'

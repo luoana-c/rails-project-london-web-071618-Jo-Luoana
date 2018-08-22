@@ -5,9 +5,12 @@
   <%= f.label :cuisine_type %>
   <%= f.select :cuisine_type, options_for_select(@recipe.cuisine_types) %><br>
 
+  <%= f.label :price %>
+  <%= f.text_field :price %><br>
 
   <%= f.label :ingredients %>
-  <%= f.collection_check_boxes :ingredient_ids, Ingredient.all, :id, :name %><br>
+  <%= f.collection_check_boxes :ingredient_ids, Ingredient.all, :id, :name  %><br>
+
   <%= f.submit %>
 
 <% end %>
