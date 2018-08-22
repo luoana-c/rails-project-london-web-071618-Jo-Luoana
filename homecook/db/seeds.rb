@@ -18,16 +18,17 @@ cuisine_types = [
 ]
 
 5.times do
-  Cookster.create(
-    name: Faker::Name.unique.name, address: Faker::Address.full_address
+  User.create(
+    name: Faker::Name.unique.name, address: Faker::Address.full_address, cookster: true, password: "password"
   )
 end
 
 5.times do
-  Foodster.create(
-    name: Faker::Name.unique.name
+  User.create(
+    name: Faker::Name.unique.name, address: Faker::Address.full_address, cookster: false, password: "password"
   )
 end
+
 
 20.times do
   Ingredient.create(
@@ -38,21 +39,21 @@ end
 
 10.times do
   Recipe.create(
-    cookster: Cookster.all.sample,
+    user_id: User.all.select{|u| u.cookster == true}.sample.id,
     name: Faker::Food.dish,
     cuisine_type: cuisine_types.sample
   )
 end
 
 one_order =Order.create(
-  cookster: Cookster.all.sample,
-  foodster: Foodster.all.sample,
-  datetime: DateTime.now,
-  amount: 5)
+  cookster_id: User.all.select{|u| u.cookster == true}.sample.id,
+  foodster_id: User.all.select{|u| u.cookster == false}.sample.id,
+  datetime: (DateTime.now + 1)
+)
 
 OrderRecipe.create(
   order: one_order,
-  recipe: Recipe.find(1),
+  recipe: Recipe.first,
   recipe_count: 2
 )
 

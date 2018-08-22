@@ -28,6 +28,8 @@ class RecipesController < ApplicationController
 
   def edit
     set_recipe
+    recipe_user_id = @recipe.user.id
+    authorized_for(recipe_user_id)
   end
 
   def update

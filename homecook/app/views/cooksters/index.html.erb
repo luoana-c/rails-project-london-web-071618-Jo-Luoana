@@ -1,6 +1,0 @@
-<h1>All cooksters:</h1>
-<ul>
-<% @cooksters.each do |cookster|%>
-  <li><%= link_to cookster.name, cookster_path(cookster) %> | Address: <%= cookster.address %> </li>
-<% end %>
-</ul>

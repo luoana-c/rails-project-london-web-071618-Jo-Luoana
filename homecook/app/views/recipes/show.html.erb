@@ -1,7 +1,7 @@
 <h1> <%= @recipe.name %> </h1>
+<h3>Price: £<%= @recipe.price %></h3>
 
 <h3>Cuisine type: <%= @recipe.cuisine_type %></h3>
-<h3>Cookster: <%= link_to @recipe.cookster.name, cookster_path(@recipe.cookster) %> </h3>
 
 <h3>This recipe has the following ingredients:</h3>
 
@@ -11,6 +11,7 @@
   <% end %>
 </ul>
 
-<%= button_to "Edit this recipe", edit_recipe_path(@recipe), method: :get %><br>
-
-<%= button_to "Create a new recipe", new_recipe_path(@recipe), method: :get %>
+<% if current_user.cookster %>
+  <%= button_to "Edit this recipe", edit_recipe_path(@recipe), method: :get %><br>
+  <%= button_to "Create a new recipe", new_recipe_path(@recipe), method: :get %>
+<% end %>

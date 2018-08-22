@@ -1,0 +1,6 @@
+<h1> <%= @user.name %></h1>
+<%= button_to "My orders", orders_path, method: :get %>
+<h3>Address:</h3>
+<p><%= @user.address %> </p>
+
+<%= render "cookster_show" %>

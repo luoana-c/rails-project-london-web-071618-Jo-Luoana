@@ -10,20 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_20_151744) do
-
-  create_table "cooksters", force: :cascade do |t|
-    t.string "name"
-    t.string "address"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "foodsters", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
+ActiveRecord::Schema.define(version: 2018_08_22_082238) do
 
   create_table "ingredients", force: :cascade do |t|
     t.string "name"
@@ -44,13 +31,10 @@ ActiveRecord::Schema.define(version: 2018_08_20_151744) do
 
   create_table "orders", force: :cascade do |t|
     t.datetime "datetime"
-    t.integer "amount"
-    t.integer "cookster_id"
     t.integer "foodster_id"
+    t.integer "cookster_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["cookster_id"], name: "index_orders_on_cookster_id"
-    t.index ["foodster_id"], name: "index_orders_on_foodster_id"
   end
 
   create_table "recipe_ingredients", force: :cascade do |t|
@@ -66,10 +50,20 @@ ActiveRecord::Schema.define(version: 2018_08_20_151744) do
   create_table "recipes", force: :cascade do |t|
     t.string "name"
     t.string "cuisine_type"
-    t.integer "cookster_id"
+    t.integer "user_id"
+    t.integer "price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["cookster_id"], name: "index_recipes_on_cookster_id"
+    t.index ["user_id"], name: "index_recipes_on_user_id"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "name"
+    t.boolean "cookster"
+    t.string "address"
+    t.string "password_digest"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end

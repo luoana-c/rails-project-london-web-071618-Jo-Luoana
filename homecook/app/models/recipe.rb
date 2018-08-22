@@ -3,7 +3,7 @@ class Recipe < ApplicationRecord
   has_many :ingredients, through: :recipe_ingredients
   has_many :order_recipes
   has_many :orders, through: :order_recipes
-  belongs_to :cookster
+  belongs_to :user
 
   validates :name, presence: true, uniqueness: true, length: {minimum: 2}
   validates :cuisine_type, presence: true

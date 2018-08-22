@@ -10,6 +10,15 @@
   </head>
 
   <body>
+    <% if flash[:authorized] %>
+  <p style="color: red;"><%= flash[:authorized] %></p>
+<% end %>
+
+<% if logged_in? %>
+  <p> You are logged in as <%= link_to current_user.name, user_path(current_user) %> <%= link_to "Log out", logout_path, method: "post" %> <%= button_to "Edit your user details", edit_user_path(current_user), method: :get %></p>
+<% else %>
+  <p> <%= link_to "Log in", login_path %> </p>
+<% end %>
     <%= yield %>
   </body>
 </html>
