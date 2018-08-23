@@ -33,4 +33,22 @@ class User < ApplicationRecord
     most_popular = self.recipes.select {|recipe| recipe.orders.count == recipe_counts.max}
   end
 
+  def average_cost_recipes
+    prices = self.recipes.map{|recipe| recipe.price }
+    if prices.empty?
+      return 0
+    else
+      prices.reduce(:+)/prices.length
+    end
+  end
+
+  def average_order_total
+    users_orders = Order.users_orders(self).map{|order| order_total}
+    if users_orders.empty?
+      return 0
+    else
+      users_orders.reduce(:+)/users_orders.length
+    end
+  end
+
 end

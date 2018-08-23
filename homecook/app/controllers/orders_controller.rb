@@ -19,7 +19,6 @@ class OrdersController < ApplicationController
       redirect_to order_path(@order)
     else
       render orders_path
-      # :see_cookster(@order.order_cookster)
     end
   end
 

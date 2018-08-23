@@ -48,13 +48,13 @@ end
 one_order =Order.create(
   cookster_id: User.all.select{|u| u.cookster == true}.sample.id,
   foodster_id: User.all.select{|u| u.cookster == false}.sample.id,
-  datetime: (DateTime.now + 1)
+  datetime_order_placed: (DateTime.now + 1)
 )
 
 OrderRecipe.create(
   order: one_order,
   recipe: Recipe.first,
-  recipe_count: 2
+  recipe_count: (1 + rand(3))
 )
 
 Recipe.all.each do |recipe|
