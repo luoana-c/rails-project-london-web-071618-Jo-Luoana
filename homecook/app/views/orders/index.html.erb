@@ -1,0 +1,13 @@
+<h1>My Orders</h1>
+
+
+<ul>
+  <%@orders.each do |order| %>
+  <li>Current status: <%=order.status%> for <%= link_to "Order", order_path(order)%>
+    <% if current_user.cookster == true%>
+      for <%=order.order_foodster.name%>
+    <% else %>
+      from <%=link_to order.order_cookster.name, see_cookster_path(order.order_cookster)%>
+      <%end%>
+      | Order placed: <%=order.nice_date(order.datetime_order_placed)%></li>
+  <%end%>

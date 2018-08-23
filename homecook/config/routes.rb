@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resources :orders
 
   get "/cooksters/:id", to: 'users#see_cookster', as: 'see_cookster'
+  post "/cooksters/:id", to: 'users#see_cookster'
   get "/signup", to: 'users#new', as: 'signup'
 
   get "/login",     to: 'sessions#new',     as: 'login'

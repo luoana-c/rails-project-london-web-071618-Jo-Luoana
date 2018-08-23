@@ -1,5 +1,13 @@
 <h1>Here are all the recipes:</h1>
 
+<h2>Most Popular Recipe(s)</h2>
+<ul>
+  <% Recipe.most_popular_recipe.each do |recipe| %>
+    <li> <%= link_to recipe.name, recipe_path(recipe) %> </li>
+  <% end %>
+</ul>
+
+
 <%= form_tag(recipes_path, method: "get") do %>
   <%= label_tag(:name, "Search by recipe:") %>
   <%= text_field_tag(:name) %>

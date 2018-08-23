@@ -6,6 +6,14 @@
   <% end %>
 </ul>
 
+<h3>Most Popular Recipe(s):</h3>
+<ul>
+<% @user.cooksters_most_popular_recipe.each do |recipe| %>
+<li><%= recipe.name%></li>
+<%end%>
+</ul>
+
+
 <h3>Recipes:</h3>
 
 <ul>

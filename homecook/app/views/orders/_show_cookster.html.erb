@@ -1,0 +1,29 @@
+<h1>Order for <%= @order.order_foodster.name%> </h1>
+
+  <h3>Current Status: <%=@order.status%>
+    <% if @order.datetime_status_order%>
+      as of <%=@order.nice_date(@order.datetime_status_order)%>
+    <%end%></h3>
+
+<% if @order.status == "Order Placed" ||@order.status == "Accepted" || @order.status == "Cooked"  %>
+<%= form_tag order_path(@order), method: :patch do %>
+  <%= select_tag 'order[status]', options_for_select(["Accepted", "Cooked", "Collected"]) %>
+  <%= hidden_field_tag 'order[datetime_status_order]', DateTime.now %>
+  <%= submit_tag "Update" %>
+  <%end%>
+
+  <%= form_tag order_path(@order), method: :patch do %>
+  <%= hidden_field_tag 'order[status]', 'Cancelled'%>
+  <%= hidden_field_tag 'order[datetime_status_order]', DateTime.now %>
+  <%= submit_tag "Cancel" %>
+  <%end%>
+<%end%>
+
+<h3>Recipes Ordered</h3>
+<ul>
+<% @order.recipes.each do |recipe| %>
+<li><%= link_to recipe.name, recipe_path(recipe) %>| Units: <%= recipe.recipe_count%> | Price/per dish: £<%=recipe.price%> | Subtotal: £<%= recipe.price * recipe.recipe_count%>  </li>
+<%end%>
+</ul>
+<h4>Order Total: £<%= @order.order_total %> </h4>
+<h4>Date Order Placed <%=@order.nice_date(@order.datetime_order_placed)%> </h4>

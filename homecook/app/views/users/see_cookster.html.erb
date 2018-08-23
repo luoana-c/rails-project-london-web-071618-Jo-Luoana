@@ -1,4 +1,4 @@
-<h1> <%= @cookster.name %></h1>
+<h1> Cookster: <%= @cookster.name %></h1>
 
 <h3>Address:</h3>
 <p><%= @cookster.address %> </p>
@@ -17,3 +17,34 @@
     <li> <%= link_to recipe.name.capitalize, recipe_path(recipe) %> </li>
   <% end %>
 </ul>
+
+<% if current_user.cookster == false %>
+  <%= form_tag see_cookster_path(@cookster), action: :get do %>
+  <%= hidden_field_tag :render, 'true' %>
+  <%= submit_tag("Order") %>
+  <% end %>
+<% end %>
+
+<% if params[:render] == 'true'%>
+  <h2>Place New Order with <%= @cookster.name %> </h2>
+  <%= form_tag orders_path do %>
+    <%= label_tag "Cooksters Recipes:" %> <br><br>
+    <% @cookster.recipes.each do |recipe| %>
+      <%= label_tag recipe.name %>
+        <% if params[:recipe_id].to_i == recipe.id %>
+          <%= check_box_tag "recipe[#{recipe.id}]", recipe.id, checked = true%>
+        <% else %>
+          <%= check_box_tag "recipe[#{recipe.id}]", recipe.id, checked = false%>
+        <%end%>
+        <%= number_field_tag "recipe[#{recipe.id}]"%>
+<br>
+    <%end%>
+    <%= hidden_field_tag "order[foodster_id]", current_user.id %>
+    <%= hidden_field_tag "order[cookster_id]", @cookster.id %>
+    <%= hidden_field_tag "order[datetime_order_placed]", DateTime.now %>
+    <%= submit_tag "Create Order" %>
+  <% end %>
+<%end%>
+
+<br>
+<%= link_to "See all Cooksters", users_path %>

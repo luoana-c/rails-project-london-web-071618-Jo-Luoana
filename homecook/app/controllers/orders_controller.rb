@@ -1,10 +1,11 @@
 class OrdersController < ApplicationController
   def index
-    @orders = Order.all
+    @orders = Order.users_orders(current_user)
   end
 
   def show
     set_order
+    @user = current_user
   end
 
   def new
@@ -12,13 +13,16 @@ class OrdersController < ApplicationController
   end
 
   def create
-    @order = Order.new(order_params)
+    @order = Order.new(order_params(:foodster_id, :cookster_id, :datetime_order_placed))
     if @order.save
+      @order.create_order_recipe(params[:recipe])
       redirect_to order_path(@order)
     else
-      render :new
+      render orders_path
+      # :see_cookster(@order.order_cookster)
     end
   end
+
 
   def edit
     set_order
@@ -26,7 +30,7 @@ class OrdersController < ApplicationController
 
   def update
     set_order
-    if @order.update(order_params)
+    if @order.update(order_params(:status, :datetime_status_order))
       redirect_to order_path(@order)
     else
       render :edit
@@ -43,6 +47,11 @@ class OrdersController < ApplicationController
     @order = Order.find(params[:id])
   end
 
-  def order_params
+  def order_params(*args)
+      params.require(:order).permit(*args)
+  end
+
+  def order_recipe_params(*args)
+      params.require(:recipe).permit(*args)
   end
 end

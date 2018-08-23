@@ -1,4 +1,4 @@
-<h1> <%= @recipe.name %> </h1>
+<h1> <%= @recipe.name %> by <%=link_to @recipe.user.name, see_cookster_path(@recipe.user)%></h1>
 <h3>Price: £<%= @recipe.price %></h3>
 
 <h3>Cuisine type: <%= @recipe.cuisine_type %></h3>
@@ -14,4 +14,10 @@
 <% if current_user.cookster %>
   <%= button_to "Edit this recipe", edit_recipe_path(@recipe), method: :get %><br>
   <%= button_to "Create a new recipe", new_recipe_path(@recipe), method: :get %>
+<% else%>
+  <%= form_tag see_cookster_path(@recipe.user), action: :get do %>
+  <%= hidden_field_tag :render, 'true' %>
+  <%= hidden_field_tag :recipe_id, @recipe.id %>
+  <%= submit_tag("Order this Recipe") %>
+  <% end %>
 <% end %>

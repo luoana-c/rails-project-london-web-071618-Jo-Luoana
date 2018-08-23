@@ -1,3 +1,3 @@
 <ul>
-  <li><%= link_to recipe.name, recipe_path(recipe) %> | <%= recipe.cuisine_type %> | <%= link_to recipe.user.name, user_path(recipe.user) %></li>
+  <li><%= link_to recipe.name, recipe_path(recipe) %> | <%= recipe.cuisine_type %> | <%= link_to recipe.user.name, see_cookster_path(recipe.user) %></li>
 </ul>

@@ -1,0 +1,5 @@
+<% if current_user.cookster == true%>
+  <%= render 'show_cookster' %>
+<% else%>
+  <%= render 'show_foodster' %>
+<%end%>

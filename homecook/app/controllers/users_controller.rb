@@ -10,6 +10,9 @@ class UsersController < ApplicationController
 
   def see_cookster
     @cookster = User.find(params[:id])
+    if params[:render] == 'true'
+      @order = Order.new
+    end
   end
 
   def new
