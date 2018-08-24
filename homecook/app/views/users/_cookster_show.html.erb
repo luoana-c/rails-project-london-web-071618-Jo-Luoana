@@ -9,22 +9,20 @@
 <h3>Most Popular Recipe(s):</h3>
 <ul>
 <% @user.cooksters_most_popular_recipe.each do |recipe| %>
-<li><%= recipe.name%></li>
+<li><%= recipe.name%> | Ordered <%=recipe.orders.count%> time(s)</li>
 <%end%>
 </ul>
 
 <h3>Highest Grossing Recipe(s):</h3>
 <ul>
-<% @user.cooksters_most_popular_recipe.each do |recipe| %>
-<li><%= recipe.name%></li>
+<% @user.cooksters_highest_grossing_recipe.each do |recipe| %>
+<li><%= recipe.name%> £<%=recipe.orders.count * recipe.price%></li>
 <%end%>
 </ul>
 
 <h3>Average Order Total:</h3>
 <ul>
-<% @user.cooksters_most_popular_recipe.each do |recipe| %>
-<li><%= recipe.name%></li>
-<%end%>
+<li>£<%=@user.average_order_total%></li>
 </ul>
 
 <h3>Recipes:</h3>

@@ -1,4 +1,4 @@
-<h1>Order from <%= @order.order_cookster.name%> </h1>
+<h1>Order from <%= link_to @order.order_cookster.name, see_cookster_path(@order.order_cookster)%> </h1>
 
   <h3>Current Status: <%=@order.status%>
     <% if @order.datetime_status_order%>
@@ -16,7 +16,7 @@
 <h3>Recipes Ordered</h3>
 <ul>
 <% @order.recipes.each do |recipe| %>
-<li><%= link_to recipe.name, recipe_path(recipe) %>| Units: <%= recipe.recipe_count%> | Price/per dish: £<%=recipe.price%> | Subtotal: £<%= recipe.price * recipe.recipe_count%>  </li>
+<li><%= link_to recipe.name, recipe_path(recipe) %>| Units: <%= recipe.count_recipes(@order)%> | Price/per dish: £<%=recipe.price%> | Subtotal: £<%= recipe.price * recipe.count_recipes(@order)%>  </li>
 <%end%>
 </ul>
 <h4>Order Total: £<%= @order.order_total %> </h4>

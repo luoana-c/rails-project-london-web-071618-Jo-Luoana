@@ -9,5 +9,5 @@
     <% else %>
       from <%=link_to order.order_cookster.name, see_cookster_path(order.order_cookster)%>
       <%end%>
-      | Order placed: <%=order.nice_date(order.datetime_order_placed)%></li>
+      | £<%=order.order_total%> | Order placed: <%=order.nice_date(order.datetime_order_placed)%></li>
   <%end%>

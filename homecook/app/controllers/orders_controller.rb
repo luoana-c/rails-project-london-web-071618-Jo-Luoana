@@ -15,14 +15,18 @@ class OrdersController < ApplicationController
   def create
     @order = Order.new(order_params(:foodster_id, :cookster_id, :datetime_order_placed))
     if @order.save
-      @order.create_order_recipe(params[:recipe])
+      if @order.create_order_recipe(params[:recipe_id], params[:recipe_amount])
+
       redirect_to order_path(@order)
+      else
+        @order.destroy
+        render orders_path
+      end
     else
       render orders_path
     end
   end
-
-
+ 
   def edit
     set_order
   end

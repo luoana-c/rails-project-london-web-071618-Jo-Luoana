@@ -34,16 +34,21 @@
 
 <% if params[:render] == 'true'%>
   <h2>Place New Order with <%= @cookster.name %> </h2>
+
+    <% if @order.errors.any? %>
+        The action could not be completed due to the following <%=pluralize(@order.errors.count, "error")%>:
+      <ul>
+      <% @order.errors.full_messages.each do |m| %>
+      <li><%=m%></li>
+      <%end%>
+    <%end%>
+
   <%= form_tag orders_path do %>
     <%= label_tag "Cooksters Recipes:" %> <br><br>
     <% @cookster.recipes.each do |recipe| %>
       <%= label_tag recipe.name %>
-        <% if params[:recipe_id].to_i == recipe.id %>
-          <%= check_box_tag "recipe[#{recipe.id}]", recipe.id, checked = true%>
-        <% else %>
-          <%= check_box_tag "recipe[#{recipe.id}]", recipe.id, checked = false%>
-        <%end%>
-        <%= number_field_tag "recipe[#{recipe.id}]"%>
+        <%= check_box_tag "recipe_id[]", recipe.id %>
+        <%= number_field_tag "recipe_amount[]"%>
 <br>
     <%end%>
     <%= hidden_field_tag "order[foodster_id]", current_user.id %>

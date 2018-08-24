@@ -1,3 +1,12 @@
+<% if @recipe.errors.any? %>
+    The action could not be completed due to the following <%=pluralize(@recipe.errors.count, "error")%>:
+  <ul>
+  <% @recipe.errors.full_messages.each do |m| %>
+  <li><%=m%></li>
+<%end%>
+</ul>
+<%end%>
+
 <%= form_for @ingredient do |f| %>
   <%= f.label :name %>
   <%= f.text_field :name %><br>

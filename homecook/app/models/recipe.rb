@@ -9,9 +9,6 @@ class Recipe < ApplicationRecord
   validates :cuisine_type, presence: true
   validates :price, presence: true, numericality: {only_integer: true, greater_than: 0}
 
-  # def self.cuisine_types
-  #   Recipe.all.map{|recipe| recipe.cuisine_type}.uniq
-  # end
 
   def cuisine_types
     [
@@ -25,8 +22,12 @@ class Recipe < ApplicationRecord
     ]
   end
 
-  def recipe_count
+  def number_recipes
       self.order_recipes.first.recipe_count
+  end
+
+  def count_recipes(order)
+      self.order_recipes.find{|o_r| o_r.recipe_id == self.id && o_r.order_id == order.id}.recipe_count
   end
 
   def self.most_popular_recipe

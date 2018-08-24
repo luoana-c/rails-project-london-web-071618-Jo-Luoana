@@ -10,15 +10,35 @@
   </head>
 
   <body>
-    <% if flash[:authorized] %>
-  <p style="color: red;"><%= flash[:authorized] %></p>
-<% end %>
 
-<% if logged_in? %>
-  <p> You are logged in as <%= link_to current_user.name, user_path(current_user) %> <%= link_to "Log out", logout_path, method: "post" %> <%= button_to "Edit your user details", edit_user_path(current_user), method: :get %></p>
-<% else %>
-  <p> <%= link_to "Log in", login_path %> </p>
-<% end %>
+<!-- Login stuff at the top. -->
+  <div class="login_info"><% if flash[:authorized] %>
+        <p style="color: red;"><%= flash[:authorized] %></p>
+      <% end %>
+
+      <% if logged_in? %>
+        <p> You are logged in as <%= link_to current_user.name, user_path(current_user) %> <%=link_to "Edit Profile", edit_user_path(current_user), method: :get%> <%= link_to "Log out", logout_path, method: "post" %></p>
+      <% else %>
+        <p> <%= link_to "Log in", login_path %> </p>
+      <% end %>
+  </div>
+
+<!-- Image and text -->
+
+<ul class="top_nav_bar_ul">
+  <li class="top_nav_bar_li" ><%= image_tag "homecook_logo.png", size: "100x100" %></li>
+  <li class="top_nav_bar_li" ><%=link_to "Orders", orders_path, method: :get, class: "top_nav_bar_link" %></li>
+  <li class="top_nav_bar_li"><%= link_to "Recipes", recipes_path, method: :get, class: "top_nav_bar_link" %></li>
+  <li class="top_nav_bar_li"><%= link_to "Cooksters", users_path, method: :get, class: "top_nav_bar_link" %></li>
+</ul> <br>
+
+
+
+<div class="yielded_content">
     <%= yield %>
+</div class="yielded_content">
+
+
+
   </body>
 </html>

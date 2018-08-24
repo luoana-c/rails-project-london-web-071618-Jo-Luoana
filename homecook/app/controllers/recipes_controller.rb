@@ -34,7 +34,6 @@ class RecipesController < ApplicationController
   end
 
   def update
-  
     set_recipe
     if @recipe.update(recipe_params(:name, :cuisine_type, :price, ingredient_ids:[]))
       redirect_to recipe_path(@recipe)

@@ -63,3 +63,6 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 #faker
 gem 'faker', :git => 'https://github.com/stympy/faker.git', :branch => 'master'
+
+#boostrap
+gem 'bootstrap', '~> 4.1.3'
